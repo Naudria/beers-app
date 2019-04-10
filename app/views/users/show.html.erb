@@ -1,2 +1,14 @@
 <h1>Hello <%= @current_user.name %>!</h1>
+<div id="app-container">
+  <h2>You have added <span class="blue"><%= @current_user.beers.count %></span> beers.</h2>
+  <div>
+    <p><% @current_user.beers.each do |beer| %>
+        <%= beer.name %> | <span class="underline"><%= link_to 'Edit', edit_beer_path(beer) %></span> | <span class="underline"><%= link_to 'Delete', beer, method: :delete, data: { confirm: 'Are you sure?' } %></span></p>
+    <% end %>
+  </div>
+</div>
+<h1 class="link"><%= link_to "View All Beers", beers_path, class: "all_beers" %></h1>
+</br>
+<p class="link"><%= link_to "Back to Profile", user_path(current_user) %></p>
+<br />
 <%= button_to 'Sign Out', signout_path, class: "big_button" %> 

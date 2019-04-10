@@ -20,11 +20,13 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-
+    @beer = Beer.find_by(id: params[:id])
+    @beer = @user.beers.build
+    @beers = @user.beers
 
     respond_to do |format|
       format.html {render :show}
-      format.json {render json: @user, status: 200 }
+      format.json {render json: @beer, status: 200 }
     end
 
   end

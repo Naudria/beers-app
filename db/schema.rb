@@ -13,13 +13,17 @@
 ActiveRecord::Schema.define(version: 2019_04_10_170106) do
 
   create_table "beers", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string "name"
+    t.string "brewery"
+    t.integer "abv"
+    t.integer "user_id"
+    t.text "review"
   end
 
   create_table "comments", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.text "content"
+    t.integer "beer_id"
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|
