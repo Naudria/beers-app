@@ -2,7 +2,24 @@ Rails.application.routes.draw do
 
   root 'welcome#home'
 
-  resources :users
+  resources :users, only: [:new, :create, :show] do
+    resources :beers
+    resources :comments
+  end
+
+
+
+  resources :beers do
+    resources :comments # Nested Resource # /posts/1/comments
+  end
+
+
+
+  get 'beers/:id', to: 'beers#show'
+  get 'beers/:id/next', to: 'beers#next'
+
+  get '/comments', to: 'comments#index'
+
 
   get '/signin' => 'sessions#new'
   post '/signin' => 'sessions#create'
