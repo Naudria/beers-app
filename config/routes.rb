@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
-  get 'sessions/new'
-  get 'welcome/home'
-  resources :comments
-  resources :beers
+
+  root 'welcome#home'
+
   resources :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  get '/signin' => 'sessions#new'
+  post '/signin' => 'sessions#create'
+  post '/signout' => 'sessions#destroy'
+  delete "/signout", to: "sessions#destroy"
+
+  get '/auth/facebook/callback' => 'sessions#create'
 end

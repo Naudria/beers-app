@@ -1,2 +1,12 @@
-<h1>Sessions#new</h1>
-<p>Find me in app/views/sessions/new.html.erb</p>
+<div class="box">
+  <div><%= form_for @user, url: signin_path, method: :post do |f| %>
+      <div><%= f.label :name %>
+        <%= f.text_field :name %></div>
+      <div><%= f.label :password %>
+        <%= f.password_field :password %></div>
+      <%= f.submit "Sign In", class: "big_button" %>
+    <% end %></div>
+  OR
+  <div><%=link_to "Login via Facebook", "/auth/facebook"%></div>
+</div>
+<div>New here? <%= link_to(controller: 'users', action: 'new') { 'Create an Account' } %></div>
