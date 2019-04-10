@@ -24,7 +24,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html {render :show}
-      format.json {render json: @beer, status: 200 }
+      format.json {render json: @user, status: 200 }
     end
 
   end
