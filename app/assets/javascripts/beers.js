@@ -5,6 +5,8 @@ $(() => {
 const bindClickHanders = () => {
 	$('.all_beers').on('click', (e) => {
     e.preventDefault()
-    console.log("hello")
+    fetch(`/beers.json`)
+    .then((res) => res.json())
+    .then((data) => console.log(data))
   })
 }
