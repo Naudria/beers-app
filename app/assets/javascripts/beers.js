@@ -10,9 +10,20 @@ $('.all_beers').on('click', (e) => {
   .then(beers => {
   	$('#app-container').html('')
     	beers.forEach(beer => {
-    		console.log(beer)
+    		let newBeer = new Beer(beer)
+    		console.log(newBeer)
     	})
 
       })
    })
+}
+
+ // JS model object / constructor function
+function Beer(beer) {
+  this.id = beer.id
+  this.name = beer.name
+  this.brewery = beer.brewery
+  this.abv = beer.abv
+  this.review = beer.review
+  this.comments = beer.id.comments
 }
