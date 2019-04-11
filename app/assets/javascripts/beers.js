@@ -5,6 +5,7 @@ $(() => {
 const bindClickHanders = () => {
 $('.all_beers').on('click', (e) => {
   e.preventDefault()
+  history.replaceState(null, null, "/beers")
   fetch(`/beers.json`)
   .then((res) => res.json())
   .then(beers => {
