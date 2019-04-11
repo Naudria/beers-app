@@ -12,7 +12,13 @@ class BeersController < ApplicationController
     end
   end
 
-
+  def show
+    @comment = @beer.comments.build
+    respond_to do |f|
+      f.html
+      f.json {render json: @beer}
+    end
+  end
 
   private
   # Use callbacks to share common setup or constraints between actions.
