@@ -1,25 +1,9 @@
 <p id="notice"><%= notice %></p>
-
-<h1>Beers</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @beers.each do |beer| %>
-      <tr>
-        <td><%= link_to 'Show', beer %></td>
-        <td><%= link_to 'Edit', edit_beer_path(beer) %></td>
-        <td><%= link_to 'Destroy', beer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Beer', new_beer_path %>
+<h1 class="link"><%= link_to "All Beers", beers_path, class: "all_beers" %></h1>
+<div id="app-container">
+</div>
+<div>
+  <p class="link"><%= link_to "Back to Profile", user_path(current_user) %></p>
+  <br/>
+  <button class="big_button"><%= link_to 'New Beer', new_beer_path %></button>
+</div>
