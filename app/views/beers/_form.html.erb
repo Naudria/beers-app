@@ -1,17 +1,32 @@
-<%= form_with(model: beer, local: true) do |form| %>
-  <% if beer.errors.any? %>
+<%= form_for @beer, html: {id: :beer_form} do |f| %>
+  <% if @beer.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(beer.errors.count, "error") %> prohibited this beer from being saved:</h2>
-
+      <h2><%= pluralize(@beer.errors.count, "error") %> prohibited this beer from being saved:</h2>
       <ul>
-      <% beer.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% @beer.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
-
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :brewery %><br>
+    <%= f.text_field :brewery %>
+  </div>
+  <div class="field">
+    <%= f.label :abv %><br>
+    <%= f.text_field :abv %>
+  </div>
+  <div class="field">
+    <%= f.label :review %><br>
+    <%= f.text_area :review %>
+  </div>
   <div class="actions">
-    <%= form.submit %>
+    <%= f.submit %>
   </div>
 <% end %>
+<p class="link"><%= link_to "Back to Profile", user_path(current_user) %></p>

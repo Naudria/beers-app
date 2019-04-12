@@ -9,6 +9,8 @@
 </div>
 <h1 class="link"><%= link_to "View All Beers", beers_path, class: "all_beers" %></h1>
 </br>
+<p class="link"><%= link_to 'New Beer', new_beer_path %></p>
+<br />
 <p class="link"><%= link_to "Back to Profile", user_path(current_user) %></p>
 <br />
 <%= button_to 'Sign Out', signout_path, class: "big_button" %> 
