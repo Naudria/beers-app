@@ -20,6 +20,30 @@ class BeersController < ApplicationController
     end
   end
 
+  def new
+    @beer = Beer.new
+  end
+
+  def edit
+    @beer = Beer.find(params[:id])
+  end
+
+  def create
+    @beer = Beer.new(beer_params)
+    @beer.user_id = current_user.id
+
+    if @beer.save
+      respond_to do |f|
+        f.html { redirect_to beers_path }
+        f.json { render json: @beer }
+      end
+    else
+      render 'new'
+
+    end
+  end
+
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_beer
