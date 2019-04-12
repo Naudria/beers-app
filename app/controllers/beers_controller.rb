@@ -43,6 +43,18 @@ class BeersController < ApplicationController
     end
   end
 
+  def edit
+    @beer = Beer.find(params[:id])
+  end
+
+  def update
+    if @beer.update(beer_params)
+      redirect_to @user
+    else
+      render :edit
+    end
+  end
+
 
   private
   # Use callbacks to share common setup or constraints between actions.

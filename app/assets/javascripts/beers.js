@@ -54,8 +54,14 @@ $(function() {
 
     .done(function(result){
       console.log(result)
+      let newBeer = new Beer(result)
+      let beerHtml = newBeer.formatShow()
+      $('#app-container').append(beerHtml)
     })
-    })
+   .catch(function(result){
+      return alert('Error!')
+       })
+  })
 })
 
  // JS model object / constructor function
