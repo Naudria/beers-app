@@ -24,8 +24,12 @@ $(document).on('click',".show_link", function(e) {
     e.preventDefault()
     // clear out app container
       $('#app-container').html('')
-    console.log($(this).attr('data-id'))
+    let id = $(this).attr('data-id')
     fetch(`/beers/${id}.json`)
+    .then(res => res.json())
+    .then(beer => {
+      console.log(beer)
+    })
     })
 }
 
