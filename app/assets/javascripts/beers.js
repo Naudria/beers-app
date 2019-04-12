@@ -28,9 +28,11 @@ $(document).on('click',".show_link", function(e) {
     fetch(`/beers/${id}.json`)
     .then(res => res.json())
     .then(beer => {
-      console.log(beer)
+     let newBeer = new Beer(beer)
+      let beerHtml = newBeer.formatShow()
+      $('#app-container').append(beerHtml)
     })
-    })
+})
 }
 
  // JS model object / constructor function
@@ -51,4 +53,20 @@ Beer.prototype.formatIndex = function() {
   </div>
   `
   return beerHtml
+}
+
+Beer.prototype.formatShow = function(){
+  let beerHtml = `
+  <div class="box">
+  <h3 class="blue small_caps">${this.name}</h3>
+    <p> <span class="blue small_caps">Brewery: </span>${this.brewery}</p>
+    <p> <span class="blue small_caps">ABV: </span>${this.abv}</p>
+    <p><span class="blue small_caps">Review: </span>${this.review}</p>
+    <button data-id="${this.id}" class="show-comments">View Comments</button><br />
+    
+  <button data-id="${this.id}" class="next-beer">Next</button>
+  </div>
+  `
+  return beerHtml
+
 }
