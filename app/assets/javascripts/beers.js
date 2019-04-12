@@ -33,6 +33,11 @@ $(document).on('click',".show_link", function(e) {
       $('#app-container').append(beerHtml)
     })
 })
+
+$(document).on('click', '.next-beer', function(e) {
+    e.preventDefault()
+    console.log('Prevented!')
+  })
 }
 
 $(function() {
@@ -92,8 +97,7 @@ Beer.prototype.formatShow = function(){
     <p> <span class="blue small_caps">ABV: </span>${this.abv}</p>
     <p><span class="blue small_caps">Review: </span>${this.review}</p>
     <button data-id="${this.id}" class="show-comments">View Comments</button><br />
-    
-  <button data-id="${this.id}" class="next-beer">Next</button>
+    <button data-id="${this.id}" class="next-beer">Next</button>
   </div>
   `
   return beerHtml
