@@ -43,7 +43,18 @@ $(function() {
     $('#app-container').html('')
     let action = $(this).attr('action');
     let method = $(this).attr('method');
-    console.log($(this).find('#beer_name').val());
+    let beer_name = $(this).find('#beer_name').val();
+    let data = $(this).serializeArray();
+     $.ajax({
+      method: method,
+      url: action,
+      data: data,
+      dataType: 'json'
+    })
+
+    .done(function(result){
+      console.log(result)
+    })
     })
 })
 
