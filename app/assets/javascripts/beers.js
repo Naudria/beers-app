@@ -40,6 +40,10 @@ $(function() {
   $("#beer_form").submit(function(e) {
     e.preventDefault();
     console.log("Prevented!")
+    $('#app-container').html('')
+    let action = $(this).attr('action');
+    let method = $(this).attr('method');
+    console.log($(this).find('#beer_name').val());
     })
 })
 
