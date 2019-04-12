@@ -35,6 +35,14 @@ $(document).on('click',".show_link", function(e) {
 })
 }
 
+$(function() {
+  //Listen for submission of the form
+  $("#beer_form").submit(function(e) {
+    e.preventDefault();
+    console.log("Prevented!")
+    })
+})
+
  // JS model object / constructor function
 function Beer(beer) {
   this.id = beer.id
