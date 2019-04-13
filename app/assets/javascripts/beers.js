@@ -56,7 +56,11 @@ e.preventDefault()
     fetch(`/beers/${id}/comments.json`)
     .then(res => res.json())
     .then(comments =>  { 
-     console.log(JSON.stringify(comments))
+     //console.log(JSON.stringify(comments))
+     comments.forEach(comment => {
+      let beerComment = new Comment(comment)
+      let commentHtml = beerComment.renderComments()
+      $('#app-container').append(commentHtml)
    })
   })
 }
