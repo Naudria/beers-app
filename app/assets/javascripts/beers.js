@@ -37,6 +37,15 @@ $(document).on('click',".show_link", function(e) {
 $(document).on('click', '.next-beer', function(e) {
     e.preventDefault()
     console.log('Prevented!')
+    $('#app-container').html('')
+    let id = $(this).attr('data-id')
+    fetch(`/beers/${id}/next.json`)
+    .then(res => res.json())
+    .then(beer => {
+      let newBeer = new Beer(beer)
+      let beerHtml = newBeer.formatShow()
+      $('#app-container').append(beerHtml)
+   })
   })
 }
 
