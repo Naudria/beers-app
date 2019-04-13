@@ -55,7 +55,7 @@ class BeersController < ApplicationController
 
   def update
     if @beer.update(beer_params)
-      redirect_to @user
+      render json: @beer
     else
       render :edit
     end
@@ -64,7 +64,7 @@ class BeersController < ApplicationController
   def destroy
     @beer.destroy
     respond_to do |format|
-      format.html { redirect_to beers_url, notice: 'Beer was successfully destroyed.' }
+      format.html { redirect_to beers_url, notice: 'Beer was successfully deleted.' }
       format.json { render json: @beers }
     end
   end

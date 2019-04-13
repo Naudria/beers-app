@@ -71,10 +71,12 @@ $(function() {
       let newBeer = new Beer(result)
       let beerHtml = newBeer.formatShow()
       $('#app-container').append(beerHtml)
+      $("#beer_form").hide();
     })
    .catch(function(result){
       return alert('Error!')
        })
+   
   })
 })
 
@@ -85,7 +87,7 @@ function Beer(beer) {
   this.brewery = beer.brewery
   this.abv = beer.abv
   this.review = beer.review
-  this.comments = beer.id.comments
+
 }
 
 //declare prototype methods on the model object 
