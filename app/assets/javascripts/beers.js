@@ -51,7 +51,6 @@ $(document).on('click', '.next-beer', function(e) {
 $(document).on('click', '.show-comments', function(e) {
 e.preventDefault()
     console.log("Prevented!")
-    $('#app-container').html('')
     let id = $(this).attr('data-id')
     fetch(`/beers/${id}/comments.json`)
     .then(res => res.json())
@@ -61,6 +60,7 @@ e.preventDefault()
       let beerComment = new Comment(comment)
       let commentHtml = beerComment.renderComments()
       $('#app-container').append(commentHtml)
+    })
    })
   })
 }
@@ -129,6 +129,25 @@ Beer.prototype.formatShow = function(){
   `
   return beerHtml
 
+}
+
+// JS model object / constructor function for Comment
+function Comment(comment) {
+  this.id = comment.id
+  this.content = comment.content
+  this.beer = comment.beer.name
+  this.user = comment.user.name
+   
+}
+
+Comment.prototype.renderComments = function(){
+  let commentHtml = `
+  <div class="box">
+  <h2>${this.beer}</h2>
+  <p>${this.user}: ${this.content}</p>
+  </div>
+  `
+  return commentHtml
 }
 
 
