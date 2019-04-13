@@ -80,7 +80,7 @@ $(function() {
   })
 })
 
- // JS model object / constructor function
+ // JS model object / constructor function for Beer
 function Beer(beer) {
   this.id = beer.id
   this.name = beer.name
