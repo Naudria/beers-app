@@ -6,7 +6,6 @@ class Beer < ApplicationRecord
 
   def next
     beer = Beer.where("id > ?", id).first
-
     if beer
       beer
     else
