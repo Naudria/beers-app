@@ -43,6 +43,11 @@ class BeersController < ApplicationController
     end
   end
 
+  def next
+    @next_beer = @beer.next
+    render json: @next_beer
+  end
+
   def edit
     @beer = Beer.find(params[:id])
   end

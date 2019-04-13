@@ -4,6 +4,14 @@ class Beer < ApplicationRecord
   validates_presence_of :name, :brewery, :abv, :user_id, :review
   validates_uniqueness_of :name
 
+  def next
+    beer = Beer.where("id > ?", id).first
 
+    if beer
+      beer
+    else
+      Beer.first
+    end
+  end
 
 end
