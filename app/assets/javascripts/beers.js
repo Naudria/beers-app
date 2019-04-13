@@ -51,6 +51,13 @@ $(document).on('click', '.next-beer', function(e) {
 $(document).on('click', '.show-comments', function(e) {
 e.preventDefault()
     console.log("Prevented!")
+    $('#app-container').html('')
+    let id = $(this).attr('data-id')
+    fetch(`/beers/${id}/comments.json`)
+    .then(res => res.json())
+    .then(comments =>  { 
+     console.log(JSON.stringify(comments))
+   })
   })
 }
 
@@ -92,7 +99,6 @@ function Beer(beer) {
   this.brewery = beer.brewery
   this.abv = beer.abv
   this.review = beer.review
-  this.comments = beer.id.comments
 
 }
 
@@ -113,7 +119,7 @@ Beer.prototype.formatShow = function(){
     <p> <span class="blue small_caps">Brewery: </span>${this.brewery}</p>
     <p> <span class="blue small_caps">ABV: </span>${this.abv}</p>
     <p><span class="blue small_caps">Review: </span>${this.review}</p>
-    <button data-id="${this.comments}" class="show-comments">View Comments</button><br />
+    <button data-id="${this.id}" class="show-comments">View Comments</button><br />
     <button data-id="${this.id}" class="next-beer">Next</button>
   </div>
   `
