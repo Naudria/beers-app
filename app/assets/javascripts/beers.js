@@ -143,7 +143,6 @@ function Comment(comment) {
 Comment.prototype.renderComments = function(){
   let commentHtml = `
   <div class="box">
-  <h2>${this.beer}</h2>
   <p>${this.user}: ${this.content}</p>
   </div>
   `
