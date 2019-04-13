@@ -26,6 +26,24 @@ class CommentsController < ApplicationController
     end
   end
 
+  def new
+    @beer = Beer.find(params["beer_id"])
+    @comment = @beer.comments.build
+  end
+
+  def create
+    @beer = Beer.find(params["beer_id"])
+    @comment = @beer.comments.build
+    if @comment.update(comment_params)
+      respond_to do |format|
+        format.html {redirect_to beer_path(@beer)}
+        format.json {render json: @comment}
+      end
+    else
+      flash.now[:message] = @comment.errors[:content][0]
+      render :new
+    end
+  end
 
 
 

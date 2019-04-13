@@ -50,6 +50,14 @@ body {
     padding: 10px;
   }
 
+  .comment_box {
+    max-width: 300px;
+    margin: 20px auto;
+    border: 1px solid gray;
+    padding: 10px;
+
+  }
+
   a {
   	color:  inherit;
   	text-decoration: none;

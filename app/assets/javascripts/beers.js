@@ -51,6 +51,7 @@ $(document).on('click', '.next-beer', function(e) {
 $(document).on('click', '.show-comments', function(e) {
 e.preventDefault()
     console.log("Prevented!")
+    $(".comment_box").remove();
     let id = $(this).attr('data-id')
     fetch(`/beers/${id}/comments.json`)
     .then(res => res.json())
@@ -135,18 +136,27 @@ Beer.prototype.formatShow = function(){
 function Comment(comment) {
   this.id = comment.id
   this.content = comment.content
-  this.beer = comment.beer.name
+  this.beer = comment.beer.id
   this.user = comment.user.name
    
 }
 
 Comment.prototype.renderComments = function(){
   let commentHtml = `
-  <div class="box">
+  <div class="comment_box">
   <p>${this.user}: ${this.content}</p>
   </div>
   `
   return commentHtml
 }
 
+
+
+$(function() {
+  //Listen for submission of the form
+  $(".comment_form").submit(function(e) {
+    e.preventDefault();
+    console.log("Prevented!")
+     })
+})
 
