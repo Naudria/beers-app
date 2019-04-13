@@ -61,7 +61,13 @@ class BeersController < ApplicationController
     end
   end
 
-
+  def destroy
+    @beer.destroy
+    respond_to do |format|
+      format.html { redirect_to beers_url, notice: 'Beer was successfully destroyed.' }
+      format.json { render json: @beers }
+    end
+  end
 
 
   private
