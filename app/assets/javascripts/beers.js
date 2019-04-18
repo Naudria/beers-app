@@ -1,8 +1,6 @@
-$(() => {
-	bindClickHanders()
-})
+$(bindClickHanders)
 
-const bindClickHanders = () => {
+function bindClickHanders () {
 $('.all_beers').on('click', (e) => {
   e.preventDefault()
   history.replaceState(null, null, "/beers")
@@ -32,6 +30,16 @@ $(document).on('click',".show_link", function(e) {
       let beerHtml = newBeer.formatShow()
       $('#app-container').append(beerHtml)
     })
+    fetch(`/beers/${id}/comments.json`)
+    .then(res => res.json())
+    .then(comments =>  { 
+     //console.log(JSON.stringify(comments))
+     comments.forEach(comment => {
+      let beerComment = new Comment(comment)
+      let commentHtml = beerComment.renderComments()
+      $('#app-container').append(commentHtml)
+    })
+   })
 })
 
 $(document).on('click', '.next-beer', function(e) {
@@ -46,6 +54,16 @@ $(document).on('click', '.next-beer', function(e) {
       let beerHtml = newBeer.formatShow()
       $('#app-container').append(beerHtml)
    })
+    fetch(`/beers/${id}/comments.json`)
+    .then(res => res.json())
+    .then(comments =>  { 
+     //console.log(JSON.stringify(comments))
+     comments.forEach(comment => {
+      let beerComment = new Comment(comment)
+      let commentHtml = beerComment.renderComments()
+      $('#app-container').append(commentHtml)
+    })
+  })
   })
 
 $(document).on('click', '.show-comments', function(e) {
@@ -72,7 +90,8 @@ $(function() {
     e.preventDefault();
     console.log("Prevented!")
     $('#app-container').html('')
-    let action = $(this).attr('action');
+    // let action = $(this).attr('action');
+    let action = this.action;
     let method = $(this).attr('method');
     let beer_name = $(this).find('#beer_name').val();
     let data = $(this).serializeArray();
@@ -105,6 +124,9 @@ function Beer(beer) {
   this.abv = beer.abv
   this.review = beer.review
 
+  this.comments = beer.comments
+
+
 }
 
 //declare prototype methods on the model object 
@@ -124,9 +146,9 @@ Beer.prototype.formatShow = function(){
     <p> <span class="blue small_caps">Brewery: </span>${this.brewery}</p>
     <p> <span class="blue small_caps">ABV: </span>${this.abv}</p>
     <p><span class="blue small_caps">Review: </span>${this.review}</p>
-    <button data-id="${this.id}" class="show-comments">View Comments</button><br />
     <button data-id="${this.id}" class="next-beer">Next</button>
   </div>
+  
   `
   return beerHtml
 
@@ -144,7 +166,7 @@ function Comment(comment) {
 Comment.prototype.renderComments = function(){
   let commentHtml = `
   <div class="comment_box">
-  <p>${this.user}: ${this.content}</p>
+  <p><span class="small_caps">${this.user}:</span> ${this.content}</p>
   </div>
   `
   return commentHtml
@@ -152,11 +174,5 @@ Comment.prototype.renderComments = function(){
 
 
 
-$(function() {
-  //Listen for submission of the form
-  $(".comment_form").submit(function(e) {
-    e.preventDefault();
-    console.log("Prevented!")
-     })
-})
+
 

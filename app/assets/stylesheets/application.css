@@ -141,4 +141,5 @@ color:  inherit;
 }
 .small_caps {
   font-variant: small-caps;
+  font-weight: bold;
 }
