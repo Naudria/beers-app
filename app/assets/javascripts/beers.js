@@ -30,17 +30,7 @@ $(document).on('click',".show_link", function(e) {
       let beerHtml = newBeer.formatShow()
       $('#app-container').append(beerHtml)
     })
-    fetch(`/beers/${id}/comments.json`)
-    .then(res => res.json())
-    .then(comments =>  { 
-     //console.log(JSON.stringify(comments))
-     comments.forEach(comment => {
-      let beerComment = new Comment(comment)
-      let commentHtml = beerComment.renderComments()
-      $('#app-container').append(commentHtml)
-    })
    })
-})
 
 $(document).on('click', '.next-beer', function(e) {
     e.preventDefault()
@@ -54,17 +44,9 @@ $(document).on('click', '.next-beer', function(e) {
       let beerHtml = newBeer.formatShow()
       $('#app-container').append(beerHtml)
    })
-    fetch(`/beers/${id}/comments.json`)
-    .then(res => res.json())
-    .then(comments =>  { 
-     //console.log(JSON.stringify(comments))
-     comments.forEach(comment => {
-      let beerComment = new Comment(comment)
-      let commentHtml = beerComment.renderComments()
-      $('#app-container').append(commentHtml)
-    })
+    
   })
-  })
+
 
 $(document).on('click', '.show-comments', function(e) {
 e.preventDefault()
@@ -123,9 +105,7 @@ function Beer(beer) {
   this.brewery = beer.brewery
   this.abv = beer.abv
   this.review = beer.review
-
   this.comments = beer.comments
-
 
 }
 
@@ -139,18 +119,27 @@ Beer.prototype.formatIndex = function() {
   return beerHtml
 }
 
+
 Beer.prototype.formatShow = function(){
-  let beerHtml = `
+  let beerComments = this.comments.map(comment => {
+    return (` 
+      <p><span>User ID ${comment.user_id}:</span> ${comment.content}</p>      
+      `)
+  }).join('')
+  console.log(beerComments)
+  return (`
   <div class="box">
   <h3 class="blue small_caps">${this.name}</h3>
     <p> <span class="blue small_caps">Brewery: </span>${this.brewery}</p>
     <p> <span class="blue small_caps">ABV: </span>${this.abv}</p>
     <p><span class="blue small_caps">Review: </span>${this.review}</p>
-    <button data-id="${this.id}" class="next-beer">Next</button>
+    </div>
+    <div class="box">
+    <p>${beerComments}</p>
   </div>
+  <button data-id="${this.id}" class="next-beer">Next Beer</button>
   
-  `
-  return beerHtml
+  `)
 
 }
 

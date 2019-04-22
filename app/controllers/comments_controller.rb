@@ -26,6 +26,7 @@ class CommentsController < ApplicationController
     end
   end
 
+
   def new
     @beer = Beer.find(params["beer_id"])
     @comment = @beer.comments.build

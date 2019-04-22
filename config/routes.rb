@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   get 'beers/:id', to: 'beers#show'
   get 'beers/:id/next', to: 'beers#next'
 
-  get '/comments', to: 'comments#index'
+
 
 
   get '/signin' => 'sessions#new'

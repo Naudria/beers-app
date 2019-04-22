@@ -10,6 +10,7 @@ class Beer < ApplicationRecord
       beer
     else
       Beer.first
+
     end
   end
 
