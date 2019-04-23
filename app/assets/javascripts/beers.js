@@ -30,7 +30,20 @@ $(document).on('click',".show_link", function(e) {
       let beerHtml = newBeer.formatShow()
       $('#app-container').append(beerHtml)
     })
+    $(".comment_box").remove();
+    fetch(`/beers/${id}/comments.json`)
+    .then(res => res.json())
+    .then(comments =>  { 
+     //console.log(JSON.stringify(comments))
+     comments.forEach(comment => {
+      let beerComment = new Comment(comment)
+      let commentHtml = beerComment.renderComments()
+      $('#app-container').append(commentHtml)
+    })
    })
+  })
+  
+  
 
 $(document).on('click', '.next-beer', function(e) {
     e.preventDefault()
@@ -44,9 +57,22 @@ $(document).on('click', '.next-beer', function(e) {
       let beerHtml = newBeer.formatShow()
       $('#app-container').append(beerHtml)
    })
-    
+    $(".comment_box").remove();
+    let nextId = parseInt($(this).attr("data-id")) + 1;
+    fetch(`/beers/${nextId}/comments.json`)
+    .then(res => res.json())
+    .then(comments =>  { 
+     //console.log(JSON.stringify(comments))
+     comments.forEach(comment => {
+      let beerComment = new Comment(comment)
+      let commentHtml = beerComment.renderComments()
+      $('#app-container').append(commentHtml)
+    })
+   })
   })
 }
+
+
 
 
 // $(document).on('click', '.show-comments', function(e) {
@@ -122,38 +148,16 @@ Beer.prototype.formatIndex = function() {
 
 
 Beer.prototype.formatShow = function(){
-  let beerComments = this.comments.map(comment => {
-    return (` 
-      <p><span>User ID# ${comment.user_id}:</span> ${comment.content}</p>      
-      `)
-  }).join('')
-  console.log(beerComments)
-  if (beerComments !== null && beerComments !== '')
-  return (`
+  let beerHtml = `
   <div class="box">
   <h3 class="blue small_caps">${this.name}</h3>
     <p> <span class="blue small_caps">Brewery: </span>${this.brewery}</p>
     <p> <span class="blue small_caps">ABV: </span>${this.abv}</p>
     <p><span class="blue small_caps">Review: </span>${this.review}</p>
-    </div>
-    <div class="box">
-      <p> <span class="blue small_caps">Comments:</span></p>
-    <p>${beerComments}</p>
+  <button data-id="${this.id}" class="next-beer">Next</button>
   </div>
-  <button data-id="${this.id}" class="next-beer">Next Beer</button>
-  
-  `)
-return (`
-  <div class="box">
-  <h3 class="blue small_caps">${this.name}</h3>
-    <p> <span class="blue small_caps">Brewery: </span>${this.brewery}</p>
-    <p> <span class="blue small_caps">ABV: </span>${this.abv}</p>
-    <p><span class="blue small_caps">Review: </span>${this.review}</p>
-    </div>
-    
-  <button data-id="${this.id}" class="next-beer">Next Beer</button>
-  
-  `)
+  `
+  return beerHtml
 
 }
 
