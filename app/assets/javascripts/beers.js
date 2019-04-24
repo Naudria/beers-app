@@ -38,7 +38,8 @@ $(document).on('click',".show_link", function(e) {
      comments.forEach(comment => {
       let beerComment = new Comment(comment)
       let commentHtml = beerComment.renderComments()
-      $('#app-container').append(commentHtml)
+      // $('#app-container').append(commentHtml)
+      $(commentHtml).appendTo('#app-container')
     })
    })
   })
@@ -66,7 +67,8 @@ $(document).on('click', '.next-beer', function(e) {
      comments.forEach(comment => {
       let beerComment = new Comment(comment)
       let commentHtml = beerComment.renderComments()
-      $('#app-container').append(commentHtml)
+      //$('#app-container').append(commentHtml)
+      $(commentHtml).appendTo('#app-container')
     })
    })
   })
