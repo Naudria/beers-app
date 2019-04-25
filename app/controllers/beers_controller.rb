@@ -13,7 +13,7 @@ class BeersController < ApplicationController
   end
 
   def show
-    @comment = @beer.comments.build
+    # @comment = @beer.comments.build
     respond_to do |f|
 
       f.json {render json: @beer}

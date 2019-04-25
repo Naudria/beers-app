@@ -22,6 +22,7 @@ $(document).on('click',".show_link", function(e) {
     e.preventDefault()
     // clear out app container
       $('#app-container').html('')
+      $('.comment_box').html('')
     let id = $(this).attr('data-id')
     fetch(`/beers/${id}.json`)
     .then(res => res.json())
@@ -29,17 +30,13 @@ $(document).on('click',".show_link", function(e) {
      let newBeer = new Beer(beer)
       let beerHtml = newBeer.formatShow()
       $('#app-container').append(beerHtml)
-    })
-    $(".comment_box").remove();
-    fetch(`/beers/${id}/comments.json`)
-    .then(res => res.json())
-    .then(comments =>  { 
-     //console.log(JSON.stringify(comments))
-     comments.forEach(comment => {
+      beer.comments.forEach(comment => {
+
       let beerComment = new Comment(comment)
       let commentHtml = beerComment.renderComments()
       // $('#app-container').append(commentHtml)
-      $(commentHtml).appendTo('#app-container')
+      $(commentHtml).appendTo($('#app-container'))
+    
     })
    })
   })
@@ -57,18 +54,13 @@ $(document).on('click', '.next-beer', function(e) {
       let newBeer = new Beer(beer)
       let beerHtml = newBeer.formatShow()
       $('#app-container').append(beerHtml)
-   })
-    $(".comment_box").remove();
-    let nextId = parseInt($(this).attr("data-id")) + 1;
-    fetch(`/beers/${nextId}/comments.json`)
-    .then(res => res.json())
-    .then(comments =>  { 
-     //console.log(JSON.stringify(comments))
-     comments.forEach(comment => {
+    beer.comments.forEach(comment => {
+
       let beerComment = new Comment(comment)
       let commentHtml = beerComment.renderComments()
-      //$('#app-container').append(commentHtml)
-      $(commentHtml).appendTo('#app-container')
+      // $('#app-container').append(commentHtml)
+      $(commentHtml).appendTo($('#app-container'))
+    
     })
    })
   })
@@ -167,8 +159,7 @@ Beer.prototype.formatShow = function(){
 function Comment(comment) {
   this.id = comment.id
   this.content = comment.content
-  this.beer = comment.beer.id
-  this.user = comment.user.name
+  this.user = comment.username
    
 }
 
