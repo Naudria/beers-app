@@ -3,12 +3,12 @@
   "private": true,
   "dependencies": {},
   "engines": {
-    "npm": "5.7.1"
+    "node": "11.5.0"
    
   },
   "scripts": {
-    "build": "cd client && npm install && npm run build && cd ..",
-    "deploy": "cp -a client/build/. public/",
-    "postinstall": "npm run build && npm run deploy && echo 'Client built!'"
+    "start": "node index.js",
+	  "build": "webpack",
+	  "heroku-postbuild": "ng build --prod"
   }
 }
