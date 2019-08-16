@@ -1,7 +1,7 @@
 {
   "name": "beers-app",
   "engines": {
-    "node": "11.5.0"
+    "node": "12.8.0"
   },
   "scripts": {
 	  "start": "node index.js",
