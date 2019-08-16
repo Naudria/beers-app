@@ -1,5 +1,9 @@
 {
   "name": "beers-app",
   "private": true,
-  "dependencies": {}
+  "dependencies": {},
+  "engines": {
+    "npm": "5.7.1",
+    "node": "9.5.0"
+  },
 }
