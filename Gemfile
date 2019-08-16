@@ -31,6 +31,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'omniauth' # for authentication, used along with provider gem from Github
 gem 'omniauth-facebook'
+gem 'webpacker', '~> 4.x'
 
 
 # Use ActiveStorage variant
