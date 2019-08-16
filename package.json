@@ -1,11 +1,11 @@
 {
   "name": "beers-app",
-  "private": true,
-  "dependencies": {},
-
+  "engines": {
+    "node": "11.5.0"
+  },
   "scripts": {
-    "start": "node index.js",
+	  "start": "node index.js",
 	  "build": "webpack",
 	  "heroku-postbuild": "ng build --prod"
-  }
+	}
 }
